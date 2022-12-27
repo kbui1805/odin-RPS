@@ -1,5 +1,6 @@
 // console.log('hello');
-
+//number of round
+const ROUND_NUMBER = 5;
 
 // randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. We’ll use this function in the game to make the computer’s play. Tip: use the console to make sure this is returning the expected output before moving to the next step!
 function getComputerChoice() {
@@ -71,4 +72,41 @@ function getResult(playerSelection, computerSelection) {
     }
 }
 
-console.log(`Computer: ${getComputerChoice()}`);
+function game() {
+    let scoreBoard = {
+        player_score: 0,
+        computer_score: 0,
+        round_num: 1,
+    };
+    let counter = 0;
+    while(counter < ROUND_NUMBER) {
+        
+        let user_choice = prompt('choose one: Rock | Paper | Scissor');
+        let computer_choice = getComputerChoice();
+        let result = getResult(user_choice, computer_choice);
+        if (result == 'win') {
+            scoreBoard.player_score++;
+        } else if (result == 'loose') {
+            scoreBoard.computer_score++;
+        } else {
+            
+        }
+        console.log(playRound(user_choice, computer_choice));
+        console.table(scoreBoard);
+        counter++;
+        scoreBoard.round_num++;
+        
+    }
+
+    if(scoreBoard.player_score == scoreBoard.computer_score) {
+        console.log(`It's a tie game!`);
+    } else if (scoreBoard.player_score > scoreBoard.computer_score) {
+        console.log('You win the game!');
+    } else {
+        console.log(`Sorry You Lose!`)
+    }
+}
+
+game();
+
+// console.log(`Computer: ${getComputerChoice()}`);
